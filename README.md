@@ -16,12 +16,10 @@
     #npm install tailwindcss
     #create a file called "style.css" in ./src/assets
     #add tailwind to css
-           @tailwind base;
-           
-           @tailwind components;
-           
+           @tailwind base;          
+           @tailwind components;          
            @tailwind utilities;
-    #create tailwind config file: tailwind.config.js - npx tailwindcss init
+    #create tailwind config file: tailwind.config.js - npx                              tailwindcss init
     #create a file called "postcss.config.js"
     #copy the code below into the file:
         module.exports = {
