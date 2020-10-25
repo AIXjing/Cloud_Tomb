@@ -59,3 +59,18 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     # <router-link></router-link>   
     
 #### npm install vue-router
+
+
+## install firebase (using module bundlers)
+   npm install --save firebase
+   import * as firebase from "firebase/app";
+   import "firebase/analytics";
+   import "firebase/auth";
+  const firebaseConfig = {
+    // ...
+  };
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+  export default firebase

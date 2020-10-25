@@ -8,7 +8,7 @@
       <h2 class="font-bold">{{ currentYear }}</h2>
     </section>
 
-    <section class="flex my=2">
+    <section class="flex my-2">
       <p
           class="text-center"
           style="width:14.28%"

@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Heros from '@/pages/Heros'
 import Calendar from "@/pages/Calendar"
 import Home from "@/pages/Home"
-import Slider from "@/pages/Slider";
+import Makeyourowntomb from "./pages/makeyourowntomb";
+import Cloudtombs from "./pages/cloudtombs";
 
 const routes = [
     {path: '/', component: Home},
-    {path: '/heros', component: Heros},
+    {path: '/makeyourowntomb', component: Makeyourowntomb},
     {path: '/calendar', component: Calendar},
-    {path: '/slider', component: Slider}
+    {path: '/cloudtombs', component: Cloudtombs}
 ]
 
 const router = createRouter({
