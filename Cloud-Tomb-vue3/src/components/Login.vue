@@ -9,11 +9,12 @@ Login
 
 </template>
 <script>
+import {store} from "@/store/store";
+
 export default {
-    inject: ["store"],
   data(){
     return {
-      authUser: this.store.state.currentUser.fireBaseUser
+      authUser: store.state.currentUser.fireBaseUser
     }
   }
 }

@@ -1,5 +1,5 @@
 
-import { reactive, readonly } from "vue";
+import { reactive, readonly, computed} from "vue";
 
 const state = reactive({
     currentUser: {
@@ -31,11 +31,13 @@ function updateRandomTomb() {
     };
 }
 
-// const totalLength = computed(() => state.items.length);
+// Use `computed` to create object that is reactive
+const randomTomb = computed(() => state.randomTomb)
 
 export const store = {
     state: readonly(state),
     updateUser,
     submitTombText,
     updateRandomTomb,
+    randomTomb,
 };

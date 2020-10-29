@@ -46,19 +46,19 @@
 </template>
 
 <script>
+import {store} from "@/store/store";
+
 export default {
-  inject: ["store"],
   data(){
     return {
-      randomTomb: this.store.state.randomTomb
+      randomTomb: store.randomTomb
     }
   },
-  created(){
-    console.log(this.store)
-  },
   mounted() {
-    console.log("onMounted called")
-    this.store.updateRandomTomb()
+    console.log("beforeMount")
+    console.log(store.state.randomTomb)
+    store.updateRandomTomb()
+    console.log(store.state.randomTomb)
   }
 }
 </script>

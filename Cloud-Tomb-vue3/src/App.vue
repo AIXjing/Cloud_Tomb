@@ -38,10 +38,6 @@ export default {
         this.authUser = {};
       }
     });
-  },
-
-  provide: {
-    store
   }
 }
 </script>
