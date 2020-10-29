@@ -5,7 +5,7 @@
         v-if="!isSubmitted"
         class="" @submit.prevent="submittomb()">
       <div class="flex justify-between">
-        <labe> Your name </labe>
+        <label> Your name </label>
         <input
             class="border rounded-lg"
             v-model="usertomb.name"
@@ -13,7 +13,7 @@
         />
       </div>
 
-      <labe class="flex justify-between"> Wish after your death </labe>
+      <label class="flex justify-between"> Wish after your death </label>
       <input
           class="border rounded-lg"
           v-model="usertomb.wish"
@@ -25,9 +25,9 @@
 
   <div v-if="isSubmitted">
     <div class="flex justify-between">
-      <labe> {{usertomb.name}} </labe>
+      <label> {{usertomb.name}} </label>
     </div>
-    <labe class="flex justify-between"> Wish after your death </labe>
+    <label class="flex justify-between"> Wish after your death </label>
     <label class="flex justify-between"> {{ usertomb.wish }} </label>
   </div>
 </div>
