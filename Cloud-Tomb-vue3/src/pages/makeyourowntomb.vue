@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import { store } from "@/store/store"
+
 export default {
   data() {
     return {
@@ -50,6 +52,7 @@ export default {
 
   methods: {
     submittomb() {
+      store.submitTombText(this.usertomb.wish)
       console.log(this.usertomb)
       this.isSubmitted = true
     },

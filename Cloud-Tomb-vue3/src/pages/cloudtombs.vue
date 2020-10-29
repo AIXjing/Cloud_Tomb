@@ -55,10 +55,7 @@ export default {
     }
   },
   mounted() {
-    // console.log("beforeMount")
-    // console.log(store.randomTomb)
     store.updateRandomTomb()
-    // console.log(store.randomTomb)
   }
 }
 </script>
