@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory} from 'vue-router'
 import Calendar from "@/pages/Calendar"
 import Home from "@/pages/Home"
 import Makeyourowntomb from "./pages/makeyourowntomb";

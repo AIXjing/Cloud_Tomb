@@ -1,5 +1,8 @@
 <template>
-  <AppHeader :isLoggedIn="isLoggedIn" @open-login-modal="isLoginOpen = true"/>
+  <AppHeader
+      :isLoggedIn="isLoggedIn"
+      @open-login-modal="isLoginOpen = true"
+  />
   <div class="w-full flex">
     <router-view></router-view>
   </div>
@@ -12,6 +15,7 @@
 import AppHeader from './components/AppHeader'
 import LoginModal from "@/components/LoginModal"
 import firebase from "@/utilities/firebase"
+import {store} from "@/store/store";
 
 export default {
   components: { AppHeader, LoginModal },
@@ -34,6 +38,10 @@ export default {
         this.authUser = {};
       }
     });
+  },
+
+  provide: {
+    store
   }
 }
 </script>

@@ -15,7 +15,9 @@
 import firebase from "@/utilities/firebase"
 
 export default {
-  props: {isLoggedIn: Boolean},
+  props: {
+    isLoggedIn: Boolean,
+  },
 
   data(){
     return {

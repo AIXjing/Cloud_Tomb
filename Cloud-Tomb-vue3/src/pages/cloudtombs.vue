@@ -1,27 +1,27 @@
 <template>
-  <div class="flex flex-wrap w-full relative">
-    <div
-        class="absolute w-full"
-        v-for="(color,index) in slides"
-        :key="color">
-      <transition name="fade">
-        <div v-if="currentSlide==index"
-             :class="color"
-             style="height:350px">
-        </div>
-      </transition>
-    </div>
-    <div class="absolute w-full" style="height:340px">
-      <div class="absolute bottom-0 w-full flex justify-center">
-        <div
-            v-for="(slider,index) in slides"
-            :key="slider"
-            @click="makeActive(index)"
-            :class="currentSlide == index ? 'bg-gray-700' : 'bg-gray-200' "
-            class="w-4 h-4 mx-2 rounded-full cursor-pointer shadow-md">
-        </div>
-      </div>
-    </div>
+<!--  <div class="flex flex-wrap w-full relative">-->
+<!--    <div-->
+<!--        class="absolute w-full"-->
+<!--        v-for="(color,index) in slides"-->
+<!--        :key="color">-->
+<!--      <transition name="fade">-->
+<!--        <div v-if="currentSlide==index"-->
+<!--             :class="color"-->
+<!--             style="height:350px">-->
+<!--        </div>-->
+<!--      </transition>-->
+<!--    </div>-->
+<!--    <div class="absolute w-full" style="height:340px">-->
+<!--      <div class="absolute bottom-0 w-full flex justify-center">-->
+<!--        <div-->
+<!--            v-for="(slider,index) in slides"-->
+<!--            :key="slider"-->
+<!--            @click="makeActive(index)"-->
+<!--            :class="currentSlide == index ? 'bg-gray-700' : 'bg-gray-200' "-->
+<!--            class="w-4 h-4 mx-2 rounded-full cursor-pointer shadow-md">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
     <!--    <div class="my-10 flex w-full">-->
     <!--      <div class="m-auto">-->
     <!--        <transition name="fade">-->
@@ -35,39 +35,30 @@
     <!--        </button>-->
     <!--      </div>-->
     <!--    </div>-->
+<!--  </div>-->
+
+  <div>
+    <p>{{randomTomb.tombText}}</p>
+    <div>
+      <strong>From {{randomTomb.birthday}}</strong>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
+  inject: ["store"],
+  data(){
     return {
-      currentSlide: 1,
-      slides: ['bg-blue-500', 'bg-yellow-500', 'bg-pink-500'],
-      interval: "",
-      // isTitleShowing: true,
+      randomTomb: this.store.state.randomTomb
     }
   },
-  methods: {
-    makeActive(index){
-      this.currentSlide = index
-    }
+  created(){
+    console.log(this.store)
   },
-
   mounted() {
-    this.interval = setInterval(() => {
-      // console.log("I am changing current slide", this.currentSlide)
-      this.currentSlide = this.currentSlide == 2 ? 0 : this.currentSlide + 1;
-      // if (this.currentSlide == 2) {
-      //   this.currentSlide = 0;
-      // } else {
-      //   this.currentSlide++;
-      // }
-    }, 3000)
-  },
-
-  beforeUnmount() {
-    clearInterval(this.interval)
+    console.log("onMounted called")
+    this.store.updateRandomTomb()
   }
 }
 </script>
