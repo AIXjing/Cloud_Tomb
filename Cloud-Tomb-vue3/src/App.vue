@@ -7,8 +7,7 @@
     <router-view></router-view>
   </div>
   <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>
-  <div>{{authUser.displayName}}</div>
-  <img :src="authUser.photoURL"/>
+
 </template>
 
 <script>
@@ -33,6 +32,7 @@ export default {
       if (user) {
         this.isLoggedIn = true;
         this.authUser = user;
+        store.updateUser(user);
       } else {
         this.isLoggedIn = false;
         this.authUser = {};

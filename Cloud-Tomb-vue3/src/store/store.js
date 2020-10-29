@@ -14,10 +14,10 @@ const state = reactive({
     }
 })
 
-function login(user) {
+function updateUser(u) {
     // TODO
     state.currentUser.isLoggedIn = true;
-    state.currentUser.fireBaseUser = user; // TODO
+    state.currentUser.fireBaseUser = u; // TODO
 }
 
 function submitTombText(text) {
@@ -35,7 +35,7 @@ function updateRandomTomb() {
 
 export const store = {
     state: readonly(state),
-    login,
+    updateUser,
     submitTombText,
     updateRandomTomb,
 };
