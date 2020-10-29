@@ -32,7 +32,7 @@ export default {
       if (user) {
         this.isLoggedIn = true;
         this.authUser = user;
-        store.updateUser(user);
+        store.loginUser(user);
       } else {
         this.isLoggedIn = false;
         this.authUser = {};

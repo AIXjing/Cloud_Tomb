@@ -13,6 +13,7 @@
 
 <script>
 import firebase from "@/utilities/firebase"
+import { store } from "@/store/store"
 
 export default {
   props: {
@@ -38,6 +39,8 @@ export default {
           .signOut()
           .then((res) => {res})
           .catch((e) => {e});
+
+      store.logoutUser();
     }
   },
 }

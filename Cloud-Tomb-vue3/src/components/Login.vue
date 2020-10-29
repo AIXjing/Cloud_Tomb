@@ -1,9 +1,9 @@
 <template>
 
 Login
-<div v-if="store.state.currentUser.isLoggedIn">
-  <div>{{authUser.displayName}}</div>
-  <img :src="authUser.photoURL"/>
+<div v-if="currentUser.isLoggedIn">
+  <div>{{currentUser.fireBaseUser.displayName}}</div>
+  <img :src="currentUser.fireBaseUser.photoURL"/>
 </div>
 
 
@@ -13,8 +13,11 @@ import {store} from "@/store/store";
 
 export default {
   data(){
+    console.log("hello")
+    console.log(store)
     return {
-      authUser: store.state.currentUser.fireBaseUser
+      currentUser: store.currentUser
+
     }
   }
 }

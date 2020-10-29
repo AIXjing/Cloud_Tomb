@@ -1,6 +1,10 @@
 
-import { reactive, readonly, computed} from "vue";
+import { reactive, computed} from "vue";
 
+// this is like my private notebook, and I want to share only some of information to others.
+// In order to do that, I can only allow others to read my notebook through a "computed" value.
+// "Computed" means the information I give to you but also notify when it's updated.
+// Also, when others want to change the content of my notebook, they need to do it via "updateXXX" method.
 const state = reactive({
     currentUser: {
         isLoggedIn: false,
@@ -14,10 +18,14 @@ const state = reactive({
     }
 })
 
-function updateUser(u) {
-    // TODO
+function loginUser(user) {
     state.currentUser.isLoggedIn = true;
-    state.currentUser.fireBaseUser = u; // TODO
+    state.currentUser.fireBaseUser = user;
+}
+
+function logoutUser() {
+    state.currentUser.isLoggedIn = false;
+    state.currentUser.fireBaseUser = null;
 }
 
 function submitTombText(text) {
@@ -33,11 +41,14 @@ function updateRandomTomb() {
 
 // Use `computed` to create object that is reactive
 const randomTomb = computed(() => state.randomTomb)
+const currentUser = computed(() => state.currentUser)
+
 
 export const store = {
-    state: readonly(state),
-    updateUser,
+    loginUser,
+    logoutUser,
     submitTombText,
     updateRandomTomb,
+    currentUser,
     randomTomb,
 };
