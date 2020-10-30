@@ -1,23 +1,21 @@
 <template>
-  <AppHeader
-      :isLoggedIn="isLoggedIn"
-      @open-login-modal="isLoginOpen = true"
-  />
+  <AppHeader/>
+<!--  :isLoggedIn="isLoggedIn" @open-login-modal="isLoginOpen = true"-->
   <div class="w-full flex">
     <router-view></router-view>
   </div>
-  <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>
+<!--  <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>-->
 
 </template>
 
 <script>
 import AppHeader from './components/AppHeader'
-import LoginModal from "@/components/LoginModal"
+// import LoginModal from "@/components/LoginModal"
 import firebase from "@/utilities/firebase"
 import {store} from "@/store/store";
 
 export default {
-  components: { AppHeader, LoginModal },
+  components: { AppHeader }, // LoginModal
 
   data() {
     return {
@@ -33,6 +31,7 @@ export default {
         this.isLoggedIn = true;
         this.authUser = user;
         store.loginUser(user);
+        console.log("login")
       } else {
         this.isLoggedIn = false;
         this.authUser = {};

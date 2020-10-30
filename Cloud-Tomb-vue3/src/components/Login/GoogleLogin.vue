@@ -1,5 +1,5 @@
 <template>
-  <section class="my-5 text-center">
+  <section class="my-5 text-center text-xl">
     <button
         class="border rounded px-2 bg-pink-300"
         @click="loginWithGoogle"
