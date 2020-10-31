@@ -7,7 +7,8 @@
 
     <div class="flex bg-gray-200">
       <div class="flex-initial text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
-        <Login />
+        <LoginComponent  @open-login-modal="isLoginOpen = true"/>
+        <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>
       </div>
       <div class="flex-initial text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
         <TombView />
@@ -18,11 +19,35 @@
 </template>
 
 <script>
-import Login from "@/components/Login"
+import LoginComponent from "@/components/LoginComponent"
 import TombView from "@/components/TombView"
+import LoginModal from "@/components/LoginModal"
+import {store} from "@/store/store"
+import firebase from "@/utilities/firebase"
 
 export default {
-  components: { Login, TombView}
+  components: {LoginComponent, TombView, LoginModal},
+
+  data() {
+    return {
+      isLoginOpen: false,
+      authUser: {},
+    }
+  },
+
+  mounted() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.isLoggedIn = true;
+        this.authUser = user;
+        store.loginUser(user);
+        console.log("login")
+      } else {
+        this.isLoggedIn = false;
+        this.authUser = {};
+      }
+    });
+  }
 }
 
 </script>
