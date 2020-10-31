@@ -10,7 +10,7 @@
 
 <script>
 
-import firebase from "@/utilities/firebase";
+import firebase from "@/utilities/firebase"
 
 export default {
   methods: {

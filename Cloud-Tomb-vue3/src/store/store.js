@@ -10,14 +10,14 @@ const state = reactive({
         isLoggedIn: false,
         tombText: "",
         birthday: "",
-        fireBaseUser: null, // name, (birthday), profile url <- from google filebase auth
+        fireBaseUser: null, // name, (birthday), profile url <- from google firebase auth
     },
     randomTomb: {
         tombText: "",
         birthday: "",
     }
 })
-
+//
 function loginUser(user) {
     state.currentUser.isLoggedIn = true;
     state.currentUser.fireBaseUser = user;
