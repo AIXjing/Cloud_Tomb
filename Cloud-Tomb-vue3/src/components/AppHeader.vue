@@ -25,7 +25,7 @@ export default {
       list:[
         {title: "Home", to: "/"},
         {title: "Calendar", to: "/calendar"},
-        {title: "Make your own tomb", to: "/makeyourowntomb"},
+        // {title: "Make your own tomb", to: "/makeyourowntomb"},
         {title: "Cloud-Tombs", to: "/cloudtombs"},
       ]
     }
