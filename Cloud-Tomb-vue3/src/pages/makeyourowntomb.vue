@@ -58,24 +58,6 @@ export default {
     },
   },
 
-  computed: {
-    herosCount() {
-      return this.heros.length
-    },
-    // randC() {
-    //   return Math.random()
-    // },
-    // fullname: {
-    //   get() {
-    //     return `The fullname is ${this.fname} ${this.lname}`
-    //   },
-    //   set(fullname) {
-    //     const values = fullname.split(" ");
-    //     this.fname = values[0];
-    //     this.lname = values[1];
-    //   },
-    // },
-  }
 }
 
 </script>

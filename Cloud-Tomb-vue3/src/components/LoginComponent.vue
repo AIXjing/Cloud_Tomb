@@ -7,21 +7,29 @@
       <div class="p-2 mt-2">
         <button
             @click="$emit('open-login-modal')"
-            class="text-xl text-white flex-1 text-center
+            class="flex-1 text-xl text-white text-center
             bg-teal-700 border-2 border-gray-500 rounded"
         >
           Log in
         </button>
+        <div class="flex-1">
+          <button
+              @click="$emit('open-signup-modal')"
+              class="text-l text-gray-700"
+          >
+            Sign up
+          </button>
+        </div>
       </div>
     </div>
     <div v-else>
-      <div>{{ currentUser.fireBaseUser.displayName}}</div>
+      <div>{{ currentUser.fireBaseUser.displayName }}</div>
       <img :src="currentUser.fireBaseUser.photoURL"/>
       <button class="border bg-pink-100">
-        <router-link class="mx-4" to="/makeyourowntomb"> Creat your own tomb! </router-link>
+        <router-link class="mx-4" to="/makeyourowntomb"> Creat your own tomb!</router-link>
       </button>
       <div>
-      <button @click="logout"> Log out </button>
+        <button @click="logout"> Log out</button>
       </div>
     </div>
 
@@ -45,8 +53,12 @@ export default {
       firebase
           .auth()
           .signOut()
-          .then((res) => {res})
-          .catch((e) => {e});
+          .then((res) => {
+            res
+          })
+          .catch((e) => {
+            e
+          });
 
       store.logoutUser();
     }
