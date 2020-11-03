@@ -4,19 +4,19 @@
     <form
         v-if="!isSubmitted"
         class="" @submit.prevent="submittomb()">
-      <div class="flex justify-between">
-        <label> Your name </label>
-        <input
-            class="border rounded-lg"
-            v-model="usertomb.name"
-            placeholder="Your name"
-        />
-      </div>
+<!--      <div class="flex justify-between">-->
+<!--        <label> Your name </label>-->
+<!--        <input-->
+<!--            class="border rounded-lg"-->
+<!--            v-model="user.name"-->
+<!--            placeholder="Your name"-->
+<!--        />-->
+<!--      </div>-->
 
-      <label class="flex justify-between"> Wish after your death </label>
+      <label class="flex justify-between"> Write down your tomb text </label>
       <input
           class="border rounded-lg"
-          v-model="usertomb.wish"
+          v-model="text"
           placeholder="Your wish"
       />
 
@@ -24,11 +24,11 @@
     </form>
 
   <div v-if="isSubmitted">
-    <div class="flex justify-between">
-      <label> {{usertomb.name}} </label>
-    </div>
-    <label class="flex justify-between"> Wish after your death </label>
-    <label class="flex justify-between"> {{ usertomb.wish }} </label>
+<!--    <div class="flex justify-between">-->
+<!--      <label> {{user.name}} </label>-->
+<!--    </div>-->
+    <label class="flex justify-between"> Your words to the future world </label>
+    <label class="flex justify-between"> {{ tombText }} </label>
   </div>
 </div>
 
@@ -38,25 +38,26 @@
 
 <script>
 import { store } from "@/store/store"
+import router from "../router";
 
 export default {
   data() {
     return {
-      usertomb: {
-        name: '',
-        wish: ''
-        },
-      isSubmitted: false
+      text: '',
+      isSubmitted: false,
+      tombText: '',
     }
   },
 
   methods: {
     submittomb() {
-      store.submitTombText(this.usertomb.wish)
-      console.log(this.usertomb)
+      this.tombText = store.submitTombText(this.text)
       this.isSubmitted = true
+      router.push({ path: '/' })
     },
   },
+
+
 
 }
 

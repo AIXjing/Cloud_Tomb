@@ -17,11 +17,6 @@
     </div>
   </div>
 
-  <div>
-    TODO: delete this:<br>
-    {{ user1TombText }}
-  </div>
-
 </template>
 
 <script>
@@ -32,7 +27,6 @@ import SignupModal from "@/components/FirebaseAuth/SignupModal"
 import {store} from "@/store/store"
 import firebase from "@/utilities/firebase"
 
-import axios from 'axios';
 
 export default {
   components: {LoginComponent, TombView, LoginModal, SignupModal},
@@ -44,7 +38,6 @@ export default {
       isSignup: false,
       authUser: {},
       isloggedIn: store.currentUser.isLoggedIn,
-      user1TombText: "test..."
     }
   },
 
@@ -62,12 +55,8 @@ export default {
         //
         // curl localhost:8080/api/tombtext/user1 -> this.user1TombText = result.text
         // ??
-        axios.get('api/tombtext/' + this.authUser.uid)
-            .then(tombResponse => {
-              console.log(tombResponse)
-              this.user1TombText = tombResponse.data.tombText
-            })
-            .catch(error => console.log(error))
+
+
 
       } else {
         // this.isLoggedIn = false;

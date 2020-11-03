@@ -1,5 +1,6 @@
 
 import { reactive, computed} from "vue";
+import axios from "axios";
 
 // this is like my private notebook, and I want to share only some of information to others.
 // In order to do that, I can only allow others to read my notebook through a "computed" value.
@@ -21,15 +22,32 @@ const state = reactive({
 function loginUser(user) {
     state.currentUser.isLoggedIn = true;
     state.currentUser.fireBaseUser = user;
+    axios.get('api/tombtext/' + user.uid)
+        .then(tombResponse => {
+            // console.log(tombResponse)
+            state.currentUser.tombText = tombResponse.data.tombText
+        })
+        .catch(error => console.log(error))
 }
 
 function logoutUser() {
     state.currentUser.isLoggedIn = false;
     state.currentUser.fireBaseUser = null;
+    state.currentUser.tombText = "";
 }
 
 function submitTombText(text) {
     state.currentUser.tombText = text;
+    axios.post('api/tombtext/' + state.currentUser.fireBaseUser.uid, {
+        tombText: state.currentUser.tombText
+    })
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
 }
 
 function updateRandomTomb() {
