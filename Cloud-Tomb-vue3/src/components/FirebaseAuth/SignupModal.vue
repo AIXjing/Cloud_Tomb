@@ -36,6 +36,16 @@
                     ref="passwordinputbox"
                 />
               </div>
+              <div class="my-2">
+                <label>Password</label>
+                <input
+                    v-model="password2"
+                    class="rounded shadow p-2 w-full"
+                    type="password"
+                    placeholder="Repeat your password"
+                    ref="passwordinputbox"
+                />
+              </div>
 
               <div class="my-2">
                 <button
@@ -64,11 +74,17 @@ export default {
     return {
       email: '',
       password: '',
+      password2: '',
       isLoading: false,
     }
   },
   methods: {
     submit() {
+      if (this.password !== this.password2) {
+        alert("Two passwords are not same!")
+        return
+      }
+
       this.isLoading = true
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
           .then(() => {
@@ -78,25 +94,20 @@ export default {
             this.close();
           })
           .catch((error) => {
-            // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            // [START_EXCLUDE]
             if (errorCode === 'auth/wrong-password') {
               alert('Wrong password.');
             } else {
               alert(errorMessage);
             }
             console.log(error);
-            // document.getElementById('quickstart-sign-in').disabled = false;
-            // [END_EXCLUDE]
             this.isLoading = false
           })
     },
     close() {
       this.$emit("close-signup");
     },
-
   },
 
   mounted() {

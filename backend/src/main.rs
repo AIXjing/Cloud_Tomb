@@ -17,7 +17,7 @@ lazy_static! {
 
 #[derive(Deserialize, Serialize, Clone)]
 struct TombTextData {
-    #[serde(alias = "tombText")]
+    #[serde(rename = "tombText", alias = "text")]
     text: String,
 }
 

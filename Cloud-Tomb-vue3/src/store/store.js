@@ -17,7 +17,7 @@ const state = reactive({
         birthday: "",
     }
 })
-//
+
 function loginUser(user) {
     state.currentUser.isLoggedIn = true;
     state.currentUser.fireBaseUser = user;
