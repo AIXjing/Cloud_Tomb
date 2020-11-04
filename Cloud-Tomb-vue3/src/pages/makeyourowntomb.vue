@@ -24,12 +24,6 @@
       kkk
     </form>
   </div>
-
-  <!--  <div v-if="isSubmitted">-->
-  <!--    <label class="flex justify-between"> Your words to the future world </label>-->
-  <!--    <label class="flex justify-between"> {{ text }} </label>-->
-  <!--  </div>-->
-
 </template>
 
 <script>
