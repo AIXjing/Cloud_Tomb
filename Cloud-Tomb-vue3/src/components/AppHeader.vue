@@ -6,8 +6,6 @@
     <router-link v-for="item in list" :key="item.to"
                  class="mx-4" :to="item.to"> {{ item.title }} </router-link>
 
-<!--    <button v-if="isLoggedIn" class="mx-4" @click="logout"> Log out </button>-->
-<!--    <button v-else class="mx-10" @click="$emit('open-login-modal')"> Log in </button>-->
   </nav>
 </template>
 

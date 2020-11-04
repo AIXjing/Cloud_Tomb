@@ -19,6 +19,7 @@ const state = reactive({
         birthday: "",
     }
 })
+// DO not use state directly!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function loginUser(user) {
     state.currentUser.isLoggedIn = true;
@@ -66,12 +67,21 @@ function updateRandomTomb() {
 const randomTomb = computed(() => state.randomTomb)
 const currentUser = computed(() => state.currentUser)
 
+function isUserLoggedIn() {
+    return state.currentUser.isLoggedIn
+}
+
+function getCurrentUser() {
+    return state.currentUser
+}
 
 export const store = {
     loginUser,
     logoutUser,
     submitTombText,
     updateRandomTomb,
+    isUserLoggedIn,
+    getCurrentUser,
     currentUser,
     randomTomb,
 };
