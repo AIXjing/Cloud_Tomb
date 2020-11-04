@@ -48,16 +48,6 @@ export default {
         this.authUser = user;
         store.loginUser(user);
         console.log(user)
-
-        // Example calls:
-        // curl https://cloudtombs.com/api/tombtext/user1
-        // curl -X POST -H "Content-Type:application/json" https://cloudtombs.com/api/tombtext/user1 -d '{"text": "new text"}'
-        //
-        // curl localhost:8080/api/tombtext/user1 -> this.user1TombText = result.text
-        // ??
-
-
-
       } else {
         // this.isLoggedIn = false;
         this.authUser = {};

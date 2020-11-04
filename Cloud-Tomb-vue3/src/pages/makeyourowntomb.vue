@@ -14,22 +14,20 @@
 <!--      </div>-->
 
       <label class="flex justify-between"> Write down your tomb text </label>
-      <input
+      <textarea
           class="border rounded-lg"
           v-model="text"
-          placeholder="Your wish"
+          placeholder="Write your inscription here"
       />
 
       <button class="flex border rounded" type="submit">Submit</button>
+      kkk
     </form>
 
-  <div v-if="isSubmitted">
-<!--    <div class="flex justify-between">-->
-<!--      <label> {{user.name}} </label>-->
-<!--    </div>-->
-    <label class="flex justify-between"> Your words to the future world </label>
-    <label class="flex justify-between"> {{ tombText }} </label>
-  </div>
+<!--  <div v-if="isSubmitted">-->
+<!--    <label class="flex justify-between"> Your words to the future world </label>-->
+<!--    <label class="flex justify-between"> {{ text }} </label>-->
+<!--  </div>-->
 </div>
 
 
@@ -45,13 +43,11 @@ export default {
     return {
       text: '',
       isSubmitted: false,
-      tombText: '',
     }
   },
-
   methods: {
     submittomb() {
-      this.tombText = store.submitTombText(this.text)
+      store.submitTombText(this.text)
       this.isSubmitted = true
       router.push({ path: '/' })
     },

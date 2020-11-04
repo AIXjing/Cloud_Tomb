@@ -1,6 +1,7 @@
 
 import { reactive, computed} from "vue";
 import axios from "axios";
+import router from "@/router";
 
 // this is like my private notebook, and I want to share only some of information to others.
 // In order to do that, I can only allow others to read my notebook through a "computed" value.
@@ -37,6 +38,10 @@ function logoutUser() {
 }
 
 function submitTombText(text) {
+    if(!state.currentUser.isLoggedIn){
+        router.push({ path: '/' })
+        return
+    }
     state.currentUser.tombText = text;
     axios.post('api/tombtext/' + state.currentUser.fireBaseUser.uid, {
         tombText: state.currentUser.tombText
