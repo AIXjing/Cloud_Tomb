@@ -15,17 +15,24 @@
         <div class="flex-1">
           <button
               @click="$emit('open-signup-modal')"
-              class="text-l text-gray-700"
-          >
+              class="text-l text-gra
+          >y-700">
             Sign up
           </button>
         </div>
       </div>
     </div>
     <div v-else>
-      <div>{{ currentUser.fireBaseUser.displayName }}</div>
-      <img :src="currentUser.fireBaseUser.photoURL"/>
-      <div v-if="currentUser.tombText == '' ">
+      <div class="text-2xl"> Hello,</div>
+      <div v-if="currentUser.fireBaseUser.displayName != null ">
+        <div>{{ currentUser.fireBaseUser.displayName }}</div>
+        <img :src="currentUser.fireBaseUser.photoURL"/>
+      </div>
+      <div v-else>
+        <div> {{ currentUser.fireBaseUser.email }}</div>
+<!--        <img class="object-contain src="@/assets/Culture-Grumpy-Cat-487386121-2.jpg">-->
+      </div>
+      <div v-if="currentUser.tombText == null">
         <button class="border bg-pink-100">
           <router-link class="mx-4" to="/makeyourowntomb"> Make your own tomb!</router-link>
         </button>

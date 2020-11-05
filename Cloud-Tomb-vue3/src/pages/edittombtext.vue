@@ -11,7 +11,7 @@
       <!--      </div>-->
 
       <label class="flex justify-between"> Inscription </label>
-      <div class="border-2">
+      <div class="border-2 p-2">
         <input v-model="currentUser.tombText" class="input"/>
       </div>
       <button @click="updateInscript"> Save</button>
