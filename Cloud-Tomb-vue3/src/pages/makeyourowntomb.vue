@@ -21,7 +21,6 @@
       />
 
       <button class="flex border rounded" type="submit">Submit</button>
-      kkk
     </form>
   </div>
 </template>

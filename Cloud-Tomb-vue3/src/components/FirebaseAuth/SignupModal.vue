@@ -1,9 +1,8 @@
 <template>
-  <div
+  <section
       @click="close"
       class="z-20 h-screen w-screen bg-gray-500 fixed top-0 opacity-50"
-  ></div>
-  <div>
+  ></section>
     <div class="absolute inset-0">
       <div class="flex h-full">
         <div class="z-20 m-auto bg-white p-2 rounded shadow w-1/3">
@@ -61,7 +60,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

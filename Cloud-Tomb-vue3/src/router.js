@@ -4,6 +4,7 @@ import Home from "@/pages/Home"
 import Makeyourowntomb from "./pages/makeyourowntomb";
 import Cloudtombs from "./pages/cloudtombs";
 import {store} from "@/store/store";
+import Edittombtext from "./pages/edittombtext";
 
 const routes = [
     {path: '/', component: Home},
@@ -11,6 +12,11 @@ const routes = [
         path: '/makeyourowntomb',
         component: Makeyourowntomb,
         meta: {requireAuth: true}
+    },
+    {
+        path: '/edittombtext',
+        component: Edittombtext,
+        meta: {requireTombCreated: true}
     },
     {path: '/calendar', component: Calendar},
     {path: '/cloudtombs', component: Cloudtombs},
@@ -24,7 +30,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requireAuth)) {
-        console.log("a")
         console.log(store.isUserLoggedIn())
         if (!store.isUserLoggedIn()) {
             next({path: '/'});
@@ -36,4 +41,16 @@ router.beforeEach((to, from, next) => {
     }
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requireTombCreated)) {
+        console.log(store.isTombCreated())
+        if (!store.isTombCreated()) {
+            next({path: '/'});
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+})
 export default router

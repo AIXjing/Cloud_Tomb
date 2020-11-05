@@ -75,6 +75,16 @@ function getCurrentUser() {
     return state.currentUser
 }
 
+function isTombCreated(){
+    if(state.currentUser.tombText){
+        return true
+    }
+    else
+    {
+        return false
+    }
+}
+
 export const store = {
     loginUser,
     logoutUser,
@@ -82,6 +92,7 @@ export const store = {
     updateRandomTomb,
     isUserLoggedIn,
     getCurrentUser,
+    isTombCreated,
     currentUser,
     randomTomb,
 };

@@ -25,9 +25,16 @@
     <div v-else>
       <div>{{ currentUser.fireBaseUser.displayName }}</div>
       <img :src="currentUser.fireBaseUser.photoURL"/>
-      <button class="border bg-pink-100">
-        <router-link class="mx-4" to="/makeyourowntomb"> Creat your own tomb!</router-link>
-      </button>
+      <div v-if="currentUser.tombText == '' ">
+        <button class="border bg-pink-100">
+          <router-link class="mx-4" to="/makeyourowntomb"> Make your own tomb!</router-link>
+        </button>
+      </div>
+      <div v-else>
+        <button class="border bg-pink-100">
+          <router-link class="mx-4" to="/edittombtext"> Edit your own tomb!</router-link>
+        </button>
+      </div>
       <div>
         <button @click="logout"> Log out</button>
       </div>
