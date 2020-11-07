@@ -26,7 +26,6 @@ import LoginComponent from "@/components/LoginComponent"
 import TombView from "@/components/TombView"
 import LoginModal from "@/components/FirebaseAuth/LoginModal"
 import SignupModal from "@/components/FirebaseAuth/SignupModal"
-import {store} from "@/store/store"
 // import firebase from "@/utilities/firebase"
 
 
@@ -37,25 +36,8 @@ export default {
     return {
       isLoginOpen: false,
       isSignupOpen: false,
-      // isSignup: false,
-      isloggedIn: store.currentUser.isLoggedIn,
     }
   },
-
-  // mounted() {
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     if (user) {
-  //       // this.isLoggedIn = true;
-  //       this.authUser = user;
-  //       store.loginUser(user);
-  //       console.log(user)
-  //     } else {
-  //       // this.isLoggedIn = false;
-  //       this.authUser = {};
-  //     }
-  //   });
-  //
-  // }
 }
 
 </script>

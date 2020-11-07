@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!currentUser.isLoggedIn">
+    <div v-if="!isLoggedIn">
       <div class="text-xl">
         Want to make your own tomb?
       </div>
@@ -24,22 +24,26 @@
     </div>
     <div v-else>
       <div class="text-2xl"> Hello,</div>
-      <div v-if="currentUser.fireBaseUser.displayName != null">
-        <img :src="currentUser.fireBaseUser.photoURL"/>
-        <div>{{ currentUser.fireBaseUser.displayName }}</div>
+      <div v-if="firebaseUser.displayName != null">
+        <img :src="firebaseUser.photoURL"/>
+        <div>{{ firebaseUser.displayName }}</div>
       </div>
       <div v-else>
-        <img class="object-fit object-center mx-auto bg-gray-400 h-18 w-16" src="@/assets/Culture-Grumpy-Cat-487386121-2.jpg">
-        <div> {{ currentUser.fireBaseUser.email }}</div>
+        <img class="object-fit object-center mx-auto bg-gray-400 h-18 w-16"
+             src="@/assets/Culture-Grumpy-Cat-487386121-2.jpg">
+        <div> {{ firebaseUser.email }}</div>
       </div>
-      <div v-if="currentUser.tombText == null">
+
+      <div>{{ currentUser.inscription }}</div>
+
+      <div v-if="!currentUser.inscription">
         <button class="border bg-pink-100">
           <router-link class="mx-4" to="/makeyourowntomb"> Make your own tomb!</router-link>
         </button>
       </div>
       <div v-else>
         <button class="border bg-pink-100">
-          <router-link class="mx-4" to="/edittombtext"> Edit your own tomb!</router-link>
+          <router-link class="mx-4" to="/makeyourowntomb"> Edit your own tomb!</router-link>
         </button>
       </div>
       <div>
@@ -58,8 +62,11 @@ import firebase from "@/utilities/firebase"
 
 export default {
   data() {
+    console.log("log in? -> " + store.isLoggedIn)
     return {
       currentUser: store.currentUser,
+      firebaseUser: store.firebaseUser,
+      isLoggedIn: store.isLoggedIn
     }
   },
   methods: {

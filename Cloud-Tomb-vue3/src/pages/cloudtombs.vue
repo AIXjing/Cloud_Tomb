@@ -39,7 +39,7 @@
 
   <div>
     Add something here.
-<!--    <p>{{randomTomb.tombText}}</p>-->
+<!--    <p>{{randomTomb.inscription}}</p>-->
 <!--    <div>-->
 <!--      <strong>From {{randomTomb.birthday}}</strong>-->
 <!--    </div>-->
@@ -52,7 +52,6 @@
 export default {
   data(){
     return {
-      // randomTomb: store.randomTomb
     }
   },
   // mounted() {

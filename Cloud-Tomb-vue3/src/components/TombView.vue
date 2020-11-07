@@ -5,7 +5,7 @@
     Random Tomb:
     <div class="flex">
       <div class="flex.none border-1 text-white m-2 bg-teal-700 box-border h-64 w-1/3 p-2">
-        {{ randomUser.tombText }}
+        {{ randomUser.inscription }}
       </div>
       <div class="flex.none border-1 text-white m-2 bg-teal-700 box-border h-64 w-1/3 p-2">
         User2's tomb.
@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       randomUser: store.randomUser,
-      // currentUser: store.currentUser,
     }
   },
   mounted() {

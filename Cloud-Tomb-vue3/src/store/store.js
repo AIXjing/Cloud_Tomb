@@ -1,92 +1,97 @@
-
-import { reactive, computed} from "vue";
+import {reactive, computed} from "vue";
 import axios from "axios";
 import router from "@/router";
+import firebase from "@/utilities/firebase";
 
 // this is like my private notebook, and I want to share only some of information to others.
 // In order to do that, I can only allow others to read my notebook through a "computed" value.
 // "Computed" means the information I give to you but also notify when it's updated.
 // Also, when others want to change the content of my notebook, they need to do it via "updateXXX" method.
 const state = reactive({
+    isLoggedIn: false,
     currentUser: {
-        isLoggedIn: false,
-        tombText: "",
+        inscription: "",
         birthday: "",
-        fireBaseUser: null, // name, (birthday), profile url <- from google firebase auth
+        firstName: "",
+        lastName: "",
     },
+    fireBaseUser: null, // name, (birthday), profile url <- from google firebase auth
     randomUser: {
         name: "",
         birthday: "",
-        tombText: "",
+        inscription: "",
     }
 })
+
 // DO not use state directly!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function loginUser(user) {
-    state.currentUser.isLoggedIn = true;
-    state.currentUser.fireBaseUser = user;
-    axios.get('api/tombtext/' + user.uid)
+    state.isLoggedIn = true;
+    state.fireBaseUser = user;
+    axios.get('https://cloud-tomb.firebaseio.com/users/' + user.uid + '.json')
         .then(tombResponse => {
-            // console.log(tombResponse)
-            state.currentUser.tombText = tombResponse.data.tombText
+            console.log(tombResponse)
+            state.currentUser.inscription = tombResponse.inscription
         })
         .catch(error => console.log(error))
 }
 
 function logoutUser() {
-    state.currentUser.isLoggedIn = false;
-    state.currentUser.fireBaseUser = null;
-    state.currentUser.tombText = "";
+    state.isLoggedIn = false;
+    state.fireBaseUser = null;
+    state.currentUser.inscription = "";
 }
 
-function submitTombText(text) {
-    if(!state.currentUser.isLoggedIn){
-        router.push({ path: '/' })
+function submitTomb(user) {
+    if (!state.isLoggedIn) {
+        router.push({path: '/'})
         return
     }
-    state.currentUser.tombText = text;
-    axios.post('api/tombtext/' + state.currentUser.fireBaseUser.uid, {
-        tombText: state.currentUser.tombText
-    })
-        .then((response) => {
-            console.log(response)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+
+    state.currentUser = user
+    state.currentUser.bucketNumber = 10001 // TODO random it
+
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+        console.log(idToken)
+        axios.put('https://cloud-tomb.firebaseio.com/users/' + state.fireBaseUser.uid + '.json?auth=' + idToken,
+            state.currentUser
+        )
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }).catch(function (error) {
+        console.log(error)
+    });
+
+
 }
 
 function updateRandomTomb() {
     // state.randomTomb = {
-    //     tombText: "A random soul had been here before",
+    //     inscription: "A random soul had been here before",
     //     birthday: "1981",
     // };
+    // TODO: use database
     axios.get('api/tombtext/' + 'NkL8rBQcGfTaD4gLTWfJoBBlyFk2')
         .then(tombResponse => {
             // console.log(tombResponse)
-            state.randomUser.tombText = tombResponse.data.tombText
+            state.randomUser.inscription = tombResponse.data.inscription
         })
         .catch(error => console.log(error))
 }
 
-// Use `computed` to create object that is reactive
-const randomUser = computed(() => state.randomUser)
+const isLoggedIn = computed(() => state.isLoggedIn)
 const currentUser = computed(() => state.currentUser)
+const firebaseUser = computed(() => state.fireBaseUser)
+const randomUser = computed(() => state.randomUser)
 
-function isUserLoggedIn() {
-    return state.currentUser.isLoggedIn
-}
-
-function getCurrentUser() {
-    return state.currentUser
-}
-
-function isTombCreated(){
-    if(state.currentUser.tombText){
+function isTombCreated() {
+    if (state.currentUser.inscription) {
         return true
-    }
-    else
-    {
+    } else {
         return false
     }
 }
@@ -94,11 +99,11 @@ function isTombCreated(){
 export const store = {
     loginUser,
     logoutUser,
-    submitTombText,
+    submitTomb,
     updateRandomTomb,
-    isUserLoggedIn,
-    getCurrentUser,
-    isTombCreated,
+    isLoggedIn,
     currentUser,
+    firebaseUser,
     randomUser,
+    isTombCreated,
 };
