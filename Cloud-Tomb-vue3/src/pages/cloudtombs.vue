@@ -38,25 +38,26 @@
 <!--  </div>-->
 
   <div>
-    <p>{{randomTomb.tombText}}</p>
-    <div>
-      <strong>From {{randomTomb.birthday}}</strong>
-    </div>
+    Add something here.
+<!--    <p>{{randomTomb.tombText}}</p>-->
+<!--    <div>-->
+<!--      <strong>From {{randomTomb.birthday}}</strong>-->
+<!--    </div>-->
   </div>
 </template>
 
 <script>
-import {store} from "@/store/store";
+// import {store} from "@/store/store";
 
 export default {
   data(){
     return {
-      randomTomb: store.randomTomb
+      // randomTomb: store.randomTomb
     }
   },
-  mounted() {
-    store.updateRandomTomb()
-  }
+  // mounted() {
+  //   store.updateRandomTomb()
+  // }
 }
 </script>
 

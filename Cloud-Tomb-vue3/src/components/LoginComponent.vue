@@ -24,13 +24,13 @@
     </div>
     <div v-else>
       <div class="text-2xl"> Hello,</div>
-      <div v-if="currentUser.fireBaseUser.displayName != null ">
-        <div>{{ currentUser.fireBaseUser.displayName }}</div>
+      <div v-if="currentUser.fireBaseUser.displayName != null">
         <img :src="currentUser.fireBaseUser.photoURL"/>
+        <div>{{ currentUser.fireBaseUser.displayName }}</div>
       </div>
       <div v-else>
+        <img class="object-fit object-center mx-auto bg-gray-400 h-18 w-16" src="@/assets/Culture-Grumpy-Cat-487386121-2.jpg">
         <div> {{ currentUser.fireBaseUser.email }}</div>
-<!--        <img class="object-contain src="@/assets/Culture-Grumpy-Cat-487386121-2.jpg">-->
       </div>
       <div v-if="currentUser.tombText == null">
         <button class="border bg-pink-100">

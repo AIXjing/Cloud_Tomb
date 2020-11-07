@@ -14,9 +14,10 @@ const state = reactive({
         birthday: "",
         fireBaseUser: null, // name, (birthday), profile url <- from google firebase auth
     },
-    randomTomb: {
-        tombText: "",
+    randomUser: {
+        name: "",
         birthday: "",
+        tombText: "",
     }
 })
 // DO not use state directly!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -53,18 +54,23 @@ function submitTombText(text) {
         .catch((error) => {
             console.log(error)
         })
-
 }
 
 function updateRandomTomb() {
-    state.randomTomb = {
-        tombText: "A random soul had been here before",
-        birthday: "1981",
-    };
+    // state.randomTomb = {
+    //     tombText: "A random soul had been here before",
+    //     birthday: "1981",
+    // };
+    axios.get('api/tombtext/' + 'NkL8rBQcGfTaD4gLTWfJoBBlyFk2')
+        .then(tombResponse => {
+            // console.log(tombResponse)
+            state.randomUser.tombText = tombResponse.data.tombText
+        })
+        .catch(error => console.log(error))
 }
 
 // Use `computed` to create object that is reactive
-const randomTomb = computed(() => state.randomTomb)
+const randomUser = computed(() => state.randomUser)
 const currentUser = computed(() => state.currentUser)
 
 function isUserLoggedIn() {
@@ -94,5 +100,5 @@ export const store = {
     getCurrentUser,
     isTombCreated,
     currentUser,
-    randomTomb,
+    randomUser,
 };
