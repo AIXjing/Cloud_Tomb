@@ -22,3 +22,17 @@ gcloud domains verify cloudtombs.com
 
 gcloud beta run domain-mappings create --service cloud-tomb --domain cloudtombs.com
 ```
+
+## Firebase realtime database:
+```
+curl -X PUT -d '{
+    "name": "Alan Turing",
+    "birthday": "June 23, 1912",
+    "inscription": "Life is about computation",
+    "bucketNum": 1001
+}' 'https://cloud-tomb.firebaseio.com/users/6ICVDCtVyma2DuSVm5WyPtH1p1Y2.json?auth=<token>'
+
+curl 'https://cloud-tomb.firebaseio.com/users/6ICVDCtVyma2DuSVm5WyPtH1p1Y2.json?print=pretty'
+
+curl 'https://cloud-tomb.firebaseio.com/users.json?orderBy="bucketNum"&startAt=1000&limitToFirst=2&print=pretty'
+```
