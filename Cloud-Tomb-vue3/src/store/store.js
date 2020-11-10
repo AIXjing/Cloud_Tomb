@@ -14,6 +14,7 @@ const state = reactive({
         birthday: "",
         firstName: "",
         lastName: "",
+        bucketNum: "",
     },
     fireBaseUser: null, // name, (birthday), profile url <- from google firebase auth
     randomUser: {
@@ -28,10 +29,11 @@ const state = reactive({
 function loginUser(user) {
     state.isLoggedIn = true;
     state.fireBaseUser = user;
+    console.log(state.fireBaseUser.uid)
     axios.get('https://cloud-tomb.firebaseio.com/users/' + user.uid + '.json')
-        .then(tombResponse => {
-            console.log(tombResponse)
-            state.currentUser.inscription = tombResponse.inscription
+        .then(dbUser => {
+            // console.log(dbUser)
+            state.currentUser = dbUser.data
         })
         .catch(error => console.log(error))
 }
@@ -49,7 +51,7 @@ function submitTomb(user) {
     }
 
     state.currentUser = user
-    state.currentUser.bucketNumber = 10001 // TODO random it
+    state.currentUser.bucketNum = Math.floor((Math.random() * 100000) + 1)
 
     firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
         console.log(idToken)
@@ -65,8 +67,6 @@ function submitTomb(user) {
     }).catch(function (error) {
         console.log(error)
     });
-
-
 }
 
 function updateRandomTomb() {
@@ -74,11 +74,10 @@ function updateRandomTomb() {
     //     inscription: "A random soul had been here before",
     //     birthday: "1981",
     // };
-    // TODO: use database
-    axios.get('api/tombtext/' + 'NkL8rBQcGfTaD4gLTWfJoBBlyFk2')
-        .then(tombResponse => {
-            // console.log(tombResponse)
-            state.randomUser.inscription = tombResponse.data.inscription
+    axios.get('https://cloud-tomb.firebaseio.com/users.json?orderBy="bucketNum"&startAt=1&limitToFirst=3&print=pretty')
+        .then(res => {
+            console.log(res)
+            state.randomUsers = res.data
         })
         .catch(error => console.log(error))
 }
@@ -86,7 +85,7 @@ function updateRandomTomb() {
 const isLoggedIn = computed(() => state.isLoggedIn)
 const currentUser = computed(() => state.currentUser)
 const firebaseUser = computed(() => state.fireBaseUser)
-const randomUser = computed(() => state.randomUser)
+const randomUsers = computed(() => state.randomUsers)
 
 function isTombCreated() {
     if (state.currentUser.inscription) {
@@ -104,6 +103,6 @@ export const store = {
     isLoggedIn,
     currentUser,
     firebaseUser,
-    randomUser,
+    randomUsers,
     isTombCreated,
 };
