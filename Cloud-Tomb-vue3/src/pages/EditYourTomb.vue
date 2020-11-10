@@ -1,8 +1,7 @@
 <template>
   <form
-      v-if="!isSubmitted"
       class="w-auto m-auto"
-      @submit.prevent="submittomb()"
+      @submit.prevent="submitTomb()"
   >
     <h1 class="text-2xl text-center m-4"> Tomb for yourself </h1>
     <div class="flex flex-wrap -mx-3 mb-6">
@@ -52,20 +51,24 @@
 
 <script>
 import {store} from "@/store/store"
-import router from "../router";
+import router from "../router"
+// import firebase from "@/utilities/firebase"
 
 export default {
   data() {
     return {
-      isSubmitted: false,
       currentUser: store.currentUser,
+      // isSaved: false,
     }
   },
   methods: {
-    submittomb() {
+    // we could add a function that only memberships can edit their tombs unlimited,
+    // while other users can only edite their tombs once.
+    submitTomb: function () {
+      // console.log(this.currentUser.inscription)
       store.submitTomb(this.currentUser)
-      this.isSubmitted = true
-      router.push({path: '/'})
+      // this.isSaved = true
+      router.push('/')
     },
   }
 

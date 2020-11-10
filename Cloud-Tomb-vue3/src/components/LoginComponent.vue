@@ -35,14 +35,14 @@
       <div> {{ firebaseUser.email }}</div>
     </div>
 
-      <div v-if="!currentUser">
+      <div v-if="!currentUser.inscription">
         <button class="border bg-pink-100">
-          <router-link class="mx-4" to="/makeyourowntomb"> Edit your own tomb!</router-link>
+          <router-link class="mx-4" to="/editYourTomb"> Create your own tomb! </router-link>
         </button>
       </div>
       <div v-else>
-        <button class="border bg-pink-100">
-          <router-link class="mx-4" to="/makeyourowntomb"> Make your own tomb!</router-link>
+        <button class="border bg-pink-100" @click="$emit('open-edittomb-modal')">
+          <router-link class="mx-4" to="/editYourTomb"> Edit your own tomb!</router-link>
         </button>
       </div>
       <div>

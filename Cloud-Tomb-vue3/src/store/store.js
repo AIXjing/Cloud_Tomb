@@ -9,13 +9,7 @@ import firebase from "@/utilities/firebase";
 // Also, when others want to change the content of my notebook, they need to do it via "updateXXX" method.
 const state = reactive({
     isLoggedIn: false,
-    currentUser: {
-        inscription: "",
-        birthday: "",
-        firstName: "",
-        lastName: "",
-        bucketNum: "",
-    },
+    currentUser: newCurrentUser(),
     fireBaseUser: null, // name, (birthday), profile url <- from google firebase auth
     randomUser: {
         name: "",
@@ -23,6 +17,16 @@ const state = reactive({
         inscription: "",
     }
 })
+
+function newCurrentUser() {
+    return {
+        inscription: "",
+        birthday: "",
+        firstName: "",
+        lastName: "",
+        bucketNum: "",
+    }
+}
 
 // DO not use state directly!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -33,7 +37,9 @@ function loginUser(user) {
     axios.get('https://cloud-tomb.firebaseio.com/users/' + user.uid + '.json')
         .then(dbUser => {
             // console.log(dbUser)
-            state.currentUser = dbUser.data
+            if (dbUser.data !== null) {
+                state.currentUser = dbUser.data
+            }
         })
         .catch(error => console.log(error))
 }
@@ -41,7 +47,7 @@ function loginUser(user) {
 function logoutUser() {
     state.isLoggedIn = false;
     state.fireBaseUser = null;
-    state.currentUser.inscription = "";
+    state.currentUser = newCurrentUser();
 }
 
 function submitTomb(user) {
@@ -51,7 +57,7 @@ function submitTomb(user) {
     }
 
     state.currentUser = user
-    state.currentUser.bucketNum = Math.floor((Math.random() * 100000) + 1)
+    state.currentUser.bucketNum = Math.floor((Math.random() * 1000000))
 
     firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
         console.log(idToken)
@@ -70,11 +76,9 @@ function submitTomb(user) {
 }
 
 function updateRandomTomb() {
-    // state.randomTomb = {
-    //     inscription: "A random soul had been here before",
-    //     birthday: "1981",
-    // };
-    axios.get('https://cloud-tomb.firebaseio.com/users.json?orderBy="bucketNum"&startAt=1&limitToFirst=3&print=pretty')
+    axios.get('https://cloud-tomb.firebaseio.com/users.json?orderBy="bucketNum"&startAt=' +
+        Math.floor((Math.random() * 1000000))
+        + '&limitToFirst=3&print=pretty')
         .then(res => {
             console.log(res)
             state.randomUsers = res.data

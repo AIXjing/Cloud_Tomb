@@ -1,8 +1,6 @@
 <template>
   <div class="w-full">
     <!--        </div>-->
-
-
     <div class="flex flex-col bg-gray-200">
       <div class="bg-gray-200">
         <h1 class="text-center">Welcome to Cloud Tomb</h1>

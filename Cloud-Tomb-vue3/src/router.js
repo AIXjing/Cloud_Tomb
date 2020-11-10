@@ -1,15 +1,15 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Calendar from "@/pages/Calendar"
 import Home from "@/pages/Home"
-import Makeyourowntomb from "./pages/makeyourowntomb";
 import Cloudtombs from "./pages/cloudtombs";
 import {store} from "@/store/store";
+import EditYourTomb from "@/pages/EditYourTomb";
 
 const routes = [
     {path: '/', component: Home},
     {
-        path: '/makeyourowntomb',
-        component: Makeyourowntomb,
+        path: '/editYourTomb',
+        component: EditYourTomb,
         meta: {requireAuth: true}
     },
     {path: '/calendar', component: Calendar},
