@@ -30,6 +30,7 @@
         />
       </div>
     </div>
+
     <div>
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full w-auto px-3">
@@ -46,13 +47,19 @@
     </div>
 
     <button class="flex border rounded p-2 m-auto" type="submit">Submit</button>
+
+<!--    <div>-->
+<!--      <b-button>Button</b-button>-->
+<!--      <b-button variant="danger">Button</b-button>-->
+<!--      <b-button variant="success">Button</b-button>-->
+<!--      <b-button variant="outline-primary">Button</b-button>-->
+<!--    </div>-->
   </form>
 </template>
 
 <script>
 import {store} from "@/store/store"
 import router from "../router"
-// import firebase from "@/utilities/firebase"
 
 export default {
   data() {
@@ -73,6 +80,4 @@ export default {
   }
 
 }
-
-
 </script>

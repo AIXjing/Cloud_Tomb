@@ -9,7 +9,7 @@
         <div class="flex-none text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
           <LoginComponent @open-login-modal="isLoginOpen = true" @open-signup-modal="isSignupOpen=true"/>
         </div>
-        <div class="flex-1 text-gray-700 text-center bg-gray-400 px-10 py-2 m-2">
+        <div class="flex-1 text-gray-700 text-center bg-gray-400 px-2 py-2 m-2">
           <TombView/>
         </div>
       </div>
