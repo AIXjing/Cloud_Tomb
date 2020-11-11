@@ -8,7 +8,7 @@
           v-for="randomUser in randomUsers" :key="randomUser"
           class="flex.none border-1 text-white m-2 bg-teal-700 box-border h-64 w-1/3 p-2">
         <div class="text-center m-2">
-          {{ randomUser.name }}
+          {{ randomUser.lastName }}
         </div>
         <div class="text-center m-2">
           {{ randomUser.birthday }}

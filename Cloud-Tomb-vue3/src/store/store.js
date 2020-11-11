@@ -78,7 +78,7 @@ function submitTomb(user) {
 function updateRandomTomb() {
     axios.get('https://cloud-tomb.firebaseio.com/users.json?orderBy="bucketNum"&startAt=' +
         Math.floor((Math.random() * 1000000))
-        + '&limitToFirst=3&print=pretty')
+        + '&limitToLast=3&print=pretty')
         .then(res => {
             console.log(res)
             state.randomUsers = res.data
