@@ -31,6 +31,39 @@
       </div>
     </div>
 
+
+    <!--    TO DO: pick birthday-->
+    <div>
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+      >
+        Birthday
+      </label>
+
+      <div class="flex flex-1">
+        <div class="border border-color-gray rounded">
+          <select v-model="dateSelected" class="text-gray-700">
+            <option disabled value="">Date</option>
+            <option v-for="day in days" :key="day">{{ day }}</option>
+          </select>
+        </div>
+
+        <div class="border border-color-gray rounded">
+          <select v-model="monthSelected" class="text-gray-700">
+            <option disabled value="">Month</option>
+            <option v-for="month in months" :key="month">{{ month }}</option>
+          </select>
+        </div>
+
+        <div class="border border-color-gray rounded">
+          <select v-model="yearSelected" class="text-gray-700">
+            <option disabled value="">Year</option>
+            <option v-for="year in years" :key="year">{{ year }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
     <div>
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full w-auto px-3">
@@ -48,12 +81,12 @@
 
     <button class="flex border rounded p-2 m-auto" type="submit">Submit</button>
 
-<!--    <div>-->
-<!--      <b-button>Button</b-button>-->
-<!--      <b-button variant="danger">Button</b-button>-->
-<!--      <b-button variant="success">Button</b-button>-->
-<!--      <b-button variant="outline-primary">Button</b-button>-->
-<!--    </div>-->
+    <!--    <div>-->
+    <!--      <b-button>Button</b-button>-->
+    <!--      <b-button variant="danger">Button</b-button>-->
+    <!--      <b-button variant="success">Button</b-button>-->
+    <!--      <b-button variant="outline-primary">Button</b-button>-->
+    <!--    </div>-->
   </form>
 </template>
 
@@ -63,11 +96,30 @@ import router from "../router"
 
 export default {
   data() {
+    let years = [];
+    let today = new Date()
+    let thisYear = today.getFullYear();
+    for (let i = thisYear; i >= 1900; i--) {
+      years.push(i);
+    }
+
+    let months = [];
+    for (let i = 1; i <= 12; i++) {
+      months.push(i);
+    }
+
     return {
       currentUser: store.currentUser,
-      // isSaved: false,
+      dateSelected: '',
+      monthSelected: '',
+      yearSelected: '',
+      days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+      months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      years: years,
     }
   },
+
+
   methods: {
     // we could add a function that only memberships can edit their tombs unlimited,
     // while other users can only edite their tombs once.
@@ -76,8 +128,9 @@ export default {
       store.submitTomb(this.currentUser)
       // this.isSaved = true
       router.push('/')
-    },
+    }
   }
-
 }
+
+
 </script>
