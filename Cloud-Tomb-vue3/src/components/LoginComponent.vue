@@ -41,8 +41,8 @@
         </button>
       </div>
       <div v-else>
-        <button class="border bg-pink-100" @click="$emit('open-edittomb-modal')">
-          <router-link class="mx-4" to="/editYourTomb"> Edit your own tomb!</router-link>
+        <button class="border bg-pink-100">
+          <router-link class="mx-4" to="/editYourTomb"> Edit your own tomb! </router-link>
         </button>
       </div>
       <div>

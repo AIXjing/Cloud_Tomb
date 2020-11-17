@@ -14,6 +14,7 @@ const routes = [
     },
     {path: '/calendar', component: Calendar},
     {path: '/cloudtombs', component: Cloudtombs},
+    {name: 'userTomb', path: '/userTomb', component: EditYourTomb} // TODO: use a new page
 
 ]
 

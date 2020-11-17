@@ -41,28 +41,39 @@
 
       <div class="flex flex-1">
         <div class="border border-color-gray rounded">
-          <select v-model="dateSelected" class="text-gray-700">
-            <option disabled value="">Date</option>
-            <option v-for="day in days" :key="day">{{ day }}</option>
+          <select v-model="birthYear" class="text-gray-700">
+            <option disabled value="">Year</option>
+            <option v-for="year in years" :key="year">{{ year }}</option>
           </select>
         </div>
 
         <div class="border border-color-gray rounded">
-          <select v-model="monthSelected" class="text-gray-700">
+          <select v-model="birthMonth" class="text-gray-700">
             <option disabled value="">Month</option>
             <option v-for="month in months" :key="month">{{ month }}</option>
           </select>
         </div>
 
         <div class="border border-color-gray rounded">
-          <select v-model="yearSelected" class="text-gray-700">
-            <option disabled value="">Year</option>
-            <option v-for="year in years" :key="year">{{ year }}</option>
+          <select v-model="birthDate" class="text-gray-700">
+            <option disabled value="">Date</option>
+            <template v-if="birthYear % 4 == 0 && birthYear % 100 != 0 && birthMonth == 'Feb' ">
+              <option v-for="day in days29" :key="day">{{ day }}</option>
+            </template>
+            <template v-else-if="birthYear % 4 != 0 && birthMonth == 'Feb' ">
+              <option v-for="day in days28" :key="day">{{ day }}</option>
+            </template>
+            <template
+                v-else-if="birthMonth == 'Apr' || birthMonth == 'June' || birthMonth == 'Sep' || birthMonth == 'Nov'">
+              <option v-for="day in days30" :key="day">{{ day }}</option>
+            </template>
+            <template v-else>
+              <option v-for="day in days31" :key="day">{{ day }}</option>
+            </template>
           </select>
         </div>
       </div>
     </div>
-
 
     <div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -88,6 +99,10 @@
     <!--      <b-button variant="outline-primary">Button</b-button>-->
     <!--    </div>-->
   </form>
+
+  <div>
+    Testing code --------------->  {{ $route.params.userId }}
+  </div>
 </template>
 
 <script>
@@ -96,40 +111,75 @@ import router from "../router"
 
 export default {
   data() {
-    let years = [];
-    let today = new Date()
-    let thisYear = today.getFullYear();
-    for (let i = thisYear; i >= 1900; i--) {
+    var years = [];
+    var today = new Date()
+    var thisYear = today.getFullYear();
+    for (var i = thisYear; i >= 1900; i--) {
       years.push(i);
     }
-
     let months = [];
-    for (let i = 1; i <= 12; i++) {
-      months.push(i);
+    for (var z = 1; z <= 12; z++) {
+      months.push(z);
+    }
+
+    let days28 = [];
+    for (var k = 1; k <= 28; k++) {
+      days28.push(k);
+    }
+
+    let days29 = [];
+    for (var l = 1; l <= 29; l++) {
+      days29.push(l);
+    }
+
+    let days30 = [];
+    for (var m = 1; m <= 30; m++) {
+      days30.push(m);
+    }
+
+    let days31 = [];
+    for (var n = 1; n <= 31; n++) {
+      days31.push(n);
     }
 
     return {
       currentUser: store.currentUser,
-      dateSelected: '',
-      monthSelected: '',
-      yearSelected: '',
-      days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-      months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      days28: days28,
+      days29: days29,
+      days30: days30,
+      days31: days31,
+      // months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      months: months,
       years: years,
+      birthYear: "",
+      birthMonth: "",
+      birthDate: "",
     }
   },
-
 
   methods: {
     // we could add a function that only memberships can edit their tombs unlimited,
     // while other users can only edite their tombs once.
     submitTomb: function () {
-      // console.log(this.currentUser.inscription)
+      this.currentUser.birthday = createBirthday(this.birthYear, this.birthMonth, this.birthDate)
       store.submitTomb(this.currentUser)
       // this.isSaved = true
       router.push('/')
     }
+  },
+
+  mounted() {
+    let birtharray = this.currentUser.birthday.split("-")
+    if(birtharray.length === 3) {
+      this.birthYear = birtharray[0]
+      this.birthMonth = birtharray[1]
+      this.birthDate = birtharray[2]
+    }
   }
+}
+
+function createBirthday (year, month, date) {
+  return year + "-" + month + "-" + date;
 }
 
 

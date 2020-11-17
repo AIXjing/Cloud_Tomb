@@ -50,6 +50,7 @@ function logoutUser() {
     state.currentUser = newCurrentUser();
 }
 
+
 function submitTomb(user) {
     if (!state.isLoggedIn) {
         router.push({path: '/'})
@@ -102,6 +103,7 @@ function isTombCreated() {
 export const store = {
     loginUser,
     logoutUser,
+    // updateBirthday,
     submitTomb,
     updateRandomTomb,
     isLoggedIn,
@@ -109,4 +111,5 @@ export const store = {
     firebaseUser,
     randomUsers,
     isTombCreated,
+
 };
