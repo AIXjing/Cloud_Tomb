@@ -4,6 +4,7 @@ import Home from "@/pages/Home"
 import Cloudtombs from "./pages/cloudtombs";
 import {store} from "@/store/store";
 import EditYourTomb from "@/pages/EditYourTomb";
+import Usertomb from "@/pages/Usertomb";
 
 const routes = [
     {path: '/', component: Home},
@@ -14,7 +15,7 @@ const routes = [
     },
     {path: '/calendar', component: Calendar},
     {path: '/cloudtombs', component: Cloudtombs},
-    {name: 'userTomb', path: '/userTomb', component: EditYourTomb} // TODO: use a new page
+    {path: '/userTomb/:userId', component: Usertomb, name: 'userTomb'} // TODO: use a new page
 
 ]
 

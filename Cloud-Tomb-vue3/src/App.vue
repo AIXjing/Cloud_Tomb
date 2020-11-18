@@ -13,17 +13,12 @@ import {store} from "@/store/store";
 
 export default {
   components: { AppHeader },
-  // data(){
-  //   return {
-  //     currentUser:store.currentUser
-  //   }
-  // },
 
   mounted() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        store.loginUser(user);
-        console.log(user)
+        store.loginUser(user)
+        // console.log(user)
       }
     });
   }

@@ -33,7 +33,7 @@ function newCurrentUser() {
 function loginUser(user) {
     state.isLoggedIn = true;
     state.fireBaseUser = user;
-    console.log(state.fireBaseUser.uid)
+    // console.log(state.fireBaseUser.uid)
     axios.get('https://cloud-tomb.firebaseio.com/users/' + user.uid + '.json')
         .then(dbUser => {
             // console.log(dbUser)
@@ -61,7 +61,7 @@ function submitTomb(user) {
     state.currentUser.bucketNum = Math.floor((Math.random() * 1000000))
 
     firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
-        console.log(idToken)
+        // console.log(idToken)
         axios.put('https://cloud-tomb.firebaseio.com/users/' + state.fireBaseUser.uid + '.json?auth=' + idToken,
             state.currentUser
         )

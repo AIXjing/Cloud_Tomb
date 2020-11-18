@@ -52,7 +52,7 @@ export default {
 
   mounted() {
     store.updateRandomTomb()
-    console.log(this.randomUsers)
+    // console.log(this.randomUsers)
   },
 
   methods: {
