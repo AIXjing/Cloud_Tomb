@@ -61,7 +61,7 @@ import firebase from "@/utilities/firebase"
 
 export default {
   data() {
-    // console.log("log in? -> " + store.isLoggedIn)
+    // console.log(store.currentUser)
     return {
       currentUser: store.currentUser,
       firebaseUser: store.firebaseUser,

@@ -3,11 +3,11 @@
       class="m-auto border border border-gray-200 rounded py-3 px-4"
   >
     <h1 class="text-2xl text-center m-4"> Tomb </h1>
-        <div class="block tracking-wide font-bold text-xl text-center my-10 ">
-          Mr/Ms: {{ randomUser.firstName}} {{ randomUser.lastName }}
-        </div>
+    <div class="block tracking-wide font-bold text-xl text-center my-10 ">
+      Mr/Ms: {{ randomUser.firstName }} {{ randomUser.lastName }}
+    </div>
 
-    <div> Photo </div>
+    <div> Photo</div>
     <div>
       <label class="block tracking-wide font-bold text-xl text-center my-10"
       >
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <button class="flex border rounded p-2 m-auto" type="submit"> Like </button>
+    <button class="flex border rounded p-2 m-auto" @click="addlike()"> Like {{ randomUser.like }}</button>
 
     <!--    <div>-->
     <!--      <b-button>Button</b-button>-->
@@ -44,22 +44,46 @@
 // import {store} from "@/store/store"
 // import router from "../router"
 import axios from "axios";
+import firebase from "@/utilities/firebase";
 
 export default {
   data() {
     return {
-      randomUser: '',
+      randomUser: {},
+    }
+  },
+
+  methods: {
+    addlike() {
+      let randomUser = this.randomUser;
+      firebase.auth().currentUser.getIdTokenResult(/* forceRefresh */ true).then(function (idTokenResult) {
+        let idToken = idTokenResult.token;
+        console.log(idToken)
+        randomUser.like++;
+        axios.put('https://cloud-tomb.firebaseio.com/users/' + randomUser.userId + '/like.json?auth=' + idToken,
+            randomUser.like
+        )
+            .then((response) => {
+              console.log(response)
+            })
+            .catch((error) => {
+              console.log(error)
+            });
+      }).catch(function (error) {
+        console.log(error)
+      });
     }
   },
 
   mounted() {
-      axios.get('https://cloud-tomb.firebaseio.com/users/' + this.$route.params.userId + '.json')
-          .then(dbUser => {
-            if (dbUser.data !== null) {
-              this.randomUser = dbUser.data
-            }
-          })
-          .catch(error => console.log(error))
-    }
+    axios.get('https://cloud-tomb.firebaseio.com/users/' + this.$route.params.userId + '.json')
+        .then(dbUser => {
+          if (dbUser.data !== null) {
+            this.randomUser = dbUser.data
+            this.randomUser.userId = this.$route.params.userId
+          }
+        })
+        .catch(error => console.log(error))
+  }
 }
 </script>

@@ -12,9 +12,11 @@ const state = reactive({
     currentUser: newCurrentUser(),
     fireBaseUser: null, // name, (birthday), profile url <- from google firebase auth
     randomUser: {
-        name: "",
+        firstName: "",
+        lastName: "",
         birthday: "",
         inscription: "",
+        like: 0,
     }
 })
 
@@ -25,6 +27,7 @@ function newCurrentUser() {
         firstName: "",
         lastName: "",
         bucketNum: "",
+        like: 0,
     }
 }
 
@@ -33,12 +36,14 @@ function newCurrentUser() {
 function loginUser(user) {
     state.isLoggedIn = true;
     state.fireBaseUser = user;
-    // console.log(state.fireBaseUser.uid)
+
+    // https://firebase.google.com/docs/auth/admin/custom-claims
+
     axios.get('https://cloud-tomb.firebaseio.com/users/' + user.uid + '.json')
         .then(dbUser => {
-            // console.log(dbUser)
             if (dbUser.data !== null) {
                 state.currentUser = dbUser.data
+                // console.log(state.currentUser)
             }
         })
         .catch(error => console.log(error))
@@ -50,7 +55,6 @@ function logoutUser() {
     state.currentUser = newCurrentUser();
 }
 
-
 function submitTomb(user) {
     if (!state.isLoggedIn) {
         router.push({path: '/'})
@@ -60,8 +64,10 @@ function submitTomb(user) {
     state.currentUser = user
     state.currentUser.bucketNum = Math.floor((Math.random() * 1000000))
 
-    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
-        // console.log(idToken)
+    firebase.auth().currentUser.getIdTokenResult(/* forceRefresh */ true).then(function (idTokenResult) {
+        console.log(idTokenResult)
+        // We have user's claims here if we want to use it.
+        let idToken = idTokenResult.token
         axios.put('https://cloud-tomb.firebaseio.com/users/' + state.fireBaseUser.uid + '.json?auth=' + idToken,
             state.currentUser
         )
@@ -81,8 +87,9 @@ function updateRandomTomb() {
         Math.floor((Math.random() * 1000000))
         + '&limitToLast=9&print=pretty')
         .then(res => {
-            console.log(res)
             state.randomUsers = res.data
+            // console.log(state.randomUsers)
+            // console.log(randomUsers)
         })
         .catch(error => console.log(error))
 }
