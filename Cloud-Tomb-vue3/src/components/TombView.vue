@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       randomUsers: store.randomUsers,
-      currentUser: store.currentUser,
+      // currentUser: store.currentUser,
     }
   },
 

@@ -36,14 +36,12 @@ function newCurrentUser() {
 function loginUser(user) {
     state.isLoggedIn = true;
     state.fireBaseUser = user;
-
     // https://firebase.google.com/docs/auth/admin/custom-claims
-
     axios.get('https://cloud-tomb.firebaseio.com/users/' + user.uid + '.json')
         .then(dbUser => {
             if (dbUser.data !== null) {
                 state.currentUser = dbUser.data
-                // console.log(state.currentUser)
+                // console.log(user.uid)
             }
         })
         .catch(error => console.log(error))

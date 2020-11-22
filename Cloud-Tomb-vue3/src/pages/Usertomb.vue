@@ -29,7 +29,10 @@
       </div>
     </div>
 
-    <button class="flex border rounded p-2 m-auto" @click="addlike()"> Like {{ randomUser.like }}</button>
+    <button class="flex border rounded p-2 m-auto" @click="addlike()"> Like {{
+        Object.keys(randomUser.like).length
+      }}
+    </button>
 
     <!--    <div>-->
     <!--      <b-button>Button</b-button>-->
@@ -49,7 +52,9 @@ import firebase from "@/utilities/firebase";
 export default {
   data() {
     return {
-      randomUser: {},
+      randomUser: {
+        like: {}
+      },
     }
   },
 
@@ -58,10 +63,10 @@ export default {
       let randomUser = this.randomUser;
       firebase.auth().currentUser.getIdTokenResult(/* forceRefresh */ true).then(function (idTokenResult) {
         let idToken = idTokenResult.token;
-        console.log(idToken)
-        randomUser.like++;
-        axios.put('https://cloud-tomb.firebaseio.com/users/' + randomUser.userId + '/like.json?auth=' + idToken,
-            randomUser.like
+
+        randomUser.like[firebase.auth().currentUser.uid] = 1
+        axios.put('https://cloud-tomb.firebaseio.com/users/' + randomUser.userId + '/like/' + firebase.auth().currentUser.uid + '.json?auth=' + idToken,
+            1
         )
             .then((response) => {
               console.log(response)
@@ -81,6 +86,10 @@ export default {
           if (dbUser.data !== null) {
             this.randomUser = dbUser.data
             this.randomUser.userId = this.$route.params.userId
+
+            if (!('like' in this.randomUser)) {
+              this.randomUser.like = {};
+            }
           }
         })
         .catch(error => console.log(error))
