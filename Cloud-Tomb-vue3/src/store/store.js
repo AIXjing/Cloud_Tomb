@@ -40,8 +40,12 @@ function loginUser(user) {
     axios.get('https://cloud-tomb.firebaseio.com/users/' + user.uid + '.json')
         .then(dbUser => {
             if (dbUser.data !== null) {
+                // passing the reference instead of copy
                 state.currentUser = dbUser.data
-                // console.log(user.uid)
+                // console.log(user)
+                // console.log(dbUser.data)
+                // console.log(state.currentUser)
+                // this means stuff on state is a special "proxy"
             }
         })
         .catch(error => console.log(error))

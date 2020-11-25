@@ -18,7 +18,6 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         store.loginUser(user)
-        // console.log(user.uid)
       }
     });
   }

@@ -4,7 +4,7 @@
   >
     <h1 class="text-2xl text-center m-4"> Tomb </h1>
     <div class="block tracking-wide font-bold text-xl text-center my-10 ">
-      Mr/Ms: {{ randomUser.firstName }} {{ randomUser.lastName }}
+       {{ randomUser.firstName }} {{ randomUser.lastName }}
     </div>
 
     <div> Photo</div>
@@ -29,7 +29,15 @@
       </div>
     </div>
 
-    <button class="flex border rounded p-2 m-auto" @click="addlike()"> Like {{
+    <button
+        v-if="isLiked"
+        class="flex border rounded bg-gray-500 p-2 m-auto" @click="changeLike()"> Liked {{
+        Object.keys(randomUser.like).length
+      }}
+    </button>
+    <button
+        v-else
+        class="flex border rounded p-2 m-auto" @click="changeLike()"> Like {{
         Object.keys(randomUser.like).length
       }}
     </button>
@@ -48,6 +56,7 @@
 // import router from "../router"
 import axios from "axios";
 import firebase from "@/utilities/firebase";
+import {store} from "@/store/store";
 
 export default {
   data() {
@@ -55,28 +64,53 @@ export default {
       randomUser: {
         like: {}
       },
+      firebaseUser: store.firebaseUser
+    }
+  },
+
+  // Once the page is refreshed, data cannot be immediately passed. Thus, this.firebaseUser = null.
+  // After a while, firebaseUser data has been passed. So isLiked has been called twice.
+  computed: {
+    isLiked() {
+      if (this.firebaseUser == null) {
+        return false
+      }
+      return this.firebaseUser.uid in this.randomUser.like
     }
   },
 
   methods: {
-    addlike() {
+    changeLike() {
+      // cannot use 'this' in 'firebase.auth().currentUser....', so we need to define another variables ahead in the method.
       let randomUser = this.randomUser;
+      let isLiked = this.isLiked;
       firebase.auth().currentUser.getIdTokenResult(/* forceRefresh */ true).then(function (idTokenResult) {
         let idToken = idTokenResult.token;
 
-        randomUser.like[firebase.auth().currentUser.uid] = 1
-        axios.put('https://cloud-tomb.firebaseio.com/users/' + randomUser.userId + '/like/' + firebase.auth().currentUser.uid + '.json?auth=' + idToken,
-            1
-        )
-            .then((response) => {
-              console.log(response)
-            })
-            .catch((error) => {
-              console.log(error)
-            });
+        if (!isLiked) {
+          randomUser.like[firebase.auth().currentUser.uid] = 1
+          axios.put('https://cloud-tomb.firebaseio.com/users/' + randomUser.userId + '/like/' + firebase.auth().currentUser.uid + '.json?auth=' + idToken,
+              1
+          )
+              .then((response) => {
+                console.log(response)
+              })
+              .catch((error) => {
+                console.log(error)
+              });
+        } else {
+          delete randomUser.like[firebase.auth().currentUser.uid]
+          axios.delete('https://cloud-tomb.firebaseio.com/users/' + randomUser.userId + '/like/' + firebase.auth().currentUser.uid + '.json?auth=' + idToken
+          ).then((response) => {
+            console.log(response)
+          }).catch((error) => {
+            console.log(error)
+          });
+        }
       }).catch(function (error) {
         console.log(error)
       });
+
     }
   },
 
@@ -86,6 +120,7 @@ export default {
           if (dbUser.data !== null) {
             this.randomUser = dbUser.data
             this.randomUser.userId = this.$route.params.userId
+            console.log(this.randomUser.like)
 
             if (!('like' in this.randomUser)) {
               this.randomUser.like = {};
