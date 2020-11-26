@@ -7,7 +7,7 @@
        {{ randomUser.firstName }} {{ randomUser.lastName }}
     </div>
 
-    <div> Photo</div>
+<!--    <div> Photo</div>-->
     <div>
       <label class="block tracking-wide font-bold text-xl text-center my-10"
       >
