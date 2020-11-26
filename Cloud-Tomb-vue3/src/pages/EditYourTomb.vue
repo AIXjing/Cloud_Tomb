@@ -4,18 +4,19 @@
       @submit.prevent="submitTomb()"
   >
     <h1 class="text-2xl text-center m-4"> Tomb for yourself </h1>
-    <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-1/2 px-3 mb-6 mb-0">
+    <div class="flex flex-wrap -mx-3 mb-2">
+      <div class="w-1/2 px-3 mb-2 mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         >
           First Name
         </label>
         <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             v-model="currentUser.firstName"
             placeholder="Your name"
         />
-        <p class="text-red-500 text-xs italic"> Please fill out this field.</p>
+        <p v-if="currentUser.firstName.length == 0 || currentUser.lastName.length == 0"
+           class="text-red-500 text-xs italic"> Please fill out this field.</p>
       </div>
 
       <div class="w-1/2 px-3">
@@ -39,7 +40,7 @@
         Birthday
       </label>
 
-      <div class="flex flex-1">
+      <div class="flex flex-1 mb-6">
         <div class="border border-color-gray rounded">
           <select v-model="birthYear" class="text-gray-700">
             <option disabled value="">Year</option>
@@ -76,8 +77,8 @@
     </div>
 
     <div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full w-auto px-3">
+      <div class="flex flex-wrap -mx-3 mt-6">
+        <div class="w-full w-auto px-3 mt-2">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           >
             The words you want to leave after you die.
@@ -90,8 +91,9 @@
       </div>
     </div>
 
-    <button class="flex border rounded p-2 m-auto" type="submit">Submit</button>
-
+    <div class="mt-4">
+      <button class="flex border rounded p-2 m-auto" type="submit">Submit</button>
+    </div>
     <!--    <div>-->
     <!--      <b-button>Button</b-button>-->
     <!--      <b-button variant="danger">Button</b-button>-->
@@ -99,10 +101,6 @@
     <!--      <b-button variant="outline-primary">Button</b-button>-->
     <!--    </div>-->
   </form>
-
-  <div>
-    Testing code --------------->  {{ $route.params.userId }}
-  </div>
 </template>
 
 <script>
@@ -170,7 +168,7 @@ export default {
 
   mounted() {
     let birtharray = this.currentUser.birthday.split("-")
-    if(birtharray.length === 3) {
+    if (birtharray.length === 3) {
       this.birthYear = birtharray[0]
       this.birthMonth = birtharray[1]
       this.birthDate = birtharray[2]
@@ -178,7 +176,7 @@ export default {
   }
 }
 
-function createBirthday (year, month, date) {
+function createBirthday(year, month, date) {
   return year + "-" + month + "-" + date;
 }
 

@@ -26,7 +26,9 @@
       <div class="text-2xl"> Hello,</div>
 
       <div v-if="firebaseUser.displayName">
-        <img :src="firebaseUser.photoURL"/>
+        <img
+            class="object-fit object-center mx-auto bg-gray-400 h-18 w-16"
+             :src="firebaseUser.photoURL" />
         <div>{{ firebaseUser.displayName }}</div>
       </div>
       <div v-else>

@@ -22,8 +22,8 @@ export default {
     return {
       list:[
         {title: "Home", to: "/"},
-        {title: "Calendar", to: "/calendar"},
-        {title: "Cloud-Tombs", to: "/cloudtombs"},
+        // {title: "Calendar", to: "/calendar"},
+        // {title: "Cloud-Tombs", to: "/cloudtombs"},
       ]
     }
   },
