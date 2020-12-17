@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div v-if="!isLoggedIn">
       <div class="text-xl">
         Want to make your own tomb?
@@ -51,10 +50,6 @@
         <button @click="logout"> Log out</button>
       </div>
     </div>
-
-
-  </div>
-
 </template>
 <script>
 import {store} from "@/store/store"

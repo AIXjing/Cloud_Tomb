@@ -1,8 +1,6 @@
 <template>
   <AppHeader/>
-  <div class="w-full flex">
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 
 </template>
 
@@ -12,7 +10,7 @@ import firebase from "@/utilities/firebase";
 import {store} from "@/store/store";
 
 export default {
-  components: { AppHeader },
+  components: {AppHeader},
 
   mounted() {
     firebase.auth().onAuthStateChanged((user) => {
