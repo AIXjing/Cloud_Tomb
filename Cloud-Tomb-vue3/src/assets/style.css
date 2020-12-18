@@ -5,7 +5,20 @@
 * {
     box-sizing: border-box;
 }
+.nav-style {
+    background-color: #627870;
+    height: 50px;
+    padding: 10px;
+}
 
+.nav-style>div{
+    color: #ccc4c4;
+    margin-left: 10px;
+    float:left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+}
 .container {
     max-width: 100%;
     margin:auto;
@@ -13,7 +26,7 @@
 
 .container>h1 {
     font-family: 'PT Sans', sans-serif;
-    color: #9e8383;
+    color: #8a7776;
     text-align: center;
     font-size: 2.5em;
     text-transform: uppercase;
@@ -23,12 +36,60 @@
 }
 
 #logincomponent {
-    border: 1px solid black;
-    padding: 10px;
+    /*height: 210px;*/
+    /*width: 200px;*/
+    border: 2px solid #917b7a;
+    padding: 0px 10px 0px 10px;
     margin: 10px 0px 10px 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 2px #cccccc;
-    background-color: #bab895;
+    background-color: #ccc4c4;
+}
+/*.profile-content{*/
+/*    padding:10px 0 10px 10px;*/
+/*}*/
+
+.user-photo {
+    width:150px;
+    height: auto;
+    padding:10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.user-name {
+    font-family: 'Roboto', sans-serif;
+    color: #5c4b4c;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5x;
+}
+
+.edit-tomb-button {
+    border-radius: 10px;
+    border:2px solid gray;
+    box-shadow: dimgray;
+    background-color: #627870;
+    width: 80%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+.user-button-text {
+    color: whitesmoke;
+    font-weight: bold;
+    /*font-size: 0.8em;*/
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin: auto;
+}
+
+#logout {
+    color: #5c4b4c;
+    text-align: center;
 }
 
 #tombview {
@@ -44,6 +105,9 @@
 @media (min-width: 992px) {
     .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
         float: left;
+    }
+    #logincomponent {
+        justify-content: center;
     }
 
     .col-lg-1 {
@@ -101,6 +165,10 @@
         float: left;
     }
 
+    #logincomponent {
+        display: none;
+    }
+
     .col-md-1 {
         width: 8.33%;
     }
@@ -153,7 +221,11 @@
 /********** Small devices only **********/
 @media (min-width: 375px) and (max-width: 765px) {
     .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
-        float: left;
+        clear: left;
+    }
+
+    #logincomponent {
+        display: none;
     }
 
     .col-sm-1 {

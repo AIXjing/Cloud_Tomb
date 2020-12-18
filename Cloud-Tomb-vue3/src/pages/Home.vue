@@ -2,12 +2,14 @@
   <div class="container">
     <h1>Welcome to Cloud Tomb</h1>
     <div class="row">
-      <div class="col-lg-3 col-md-3">
+      <div class="col-lg-3">
         <div id="logincomponent">
-          <LoginComponent @open-login-modal="isLoginOpen = true" @open-signup-modal="isSignupOpen=true"/>
+          <div id="logincomponent-box">
+            <LoginComponent @open-login-modal="isLoginOpen = true" @open-signup-modal="isSignupOpen=true"/>
+          </div>
         </div>
       </div>
-      <div class="col-lg-9 col-md-9">
+      <div class="col-lg-9">
         <div id="tombview">
           <TombView/>
         </div>
