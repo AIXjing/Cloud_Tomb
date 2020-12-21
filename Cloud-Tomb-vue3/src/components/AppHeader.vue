@@ -1,7 +1,10 @@
 <template>
   <nav class="nav-style">
     <div>
-      <router-link v-for="item in list" :key="item.to" :to="item.to"> {{ item.title }}</router-link>
+      <router-link :to="{path: '/'}"> Home </router-link>
+    </div>
+    <div id="nav-mypage">
+      <router-link :to="{path: '/Mypage'}"> My page </router-link>
     </div>
   </nav>
 </template>
@@ -17,11 +20,11 @@ export default {
 
   data() {
     return {
-      list: [
-        {title: "Home", to: "/"},
-        // {title: "Calendar", to: "/calendar"},
+      // list: [
+      //   {title: "Home", to: "/"},
+      //   {title: "My page", to: "/Mypage"},
         // {title: "Cloud-Tombs", to: "/cloudtombs"},
-      ]
+      // ]
     }
   },
 }
