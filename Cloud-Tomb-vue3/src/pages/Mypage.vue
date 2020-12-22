@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="main-content" class="container">
     <h1>Welcome to Cloud Tomb</h1>
     <div id="logincomponent-mypage">
         <LoginComponent/>

@@ -5,26 +5,28 @@
 * {
     box-sizing: border-box;
 }
+
 .nav-style {
     background-color: #627870;
     height: 50px;
     padding: 10px;
 }
 
-.nav-style>div{
+.nav-style > div {
     color: #ccc4c4;
     margin-left: 10px;
-    float:left;
+    float: left;
     font-family: 'Roboto', sans-serif;
     font-size: 1.2em;
     font-weight: bold;
 }
-.container {
-    max-width: 100%;
-    margin:auto;
+
+#main-content {
+    max-width: 95%;
+    margin: auto;
 }
 
-.container>h1 {
+#main-content > h1 {
     font-family: 'PT Sans', sans-serif;
     color: #8a7776;
     text-align: center;
@@ -39,39 +41,39 @@
 }
 
 #logincomponent {
-    /*height: 210px;*/
-    /*width: 200px;*/
     border: 2px solid #917b7a;
     padding: 0px 10px 0px 10px;
-    margin: 10px 0px 10px 10px;
+    margin-right: 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 2px #cccccc;
     background-color: #ccc4c4;
 }
+
 /*.profile-content{*/
 /*    padding:10px 0 10px 10px;*/
 /*}*/
 
 .user-photo {
-    width:150px;
+    width: 150px;
     height: auto;
-    padding:10px;
+    padding: 10px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
 .user-name {
     font-family: 'Roboto', sans-serif;
     color: #5c4b4c;
     text-align: center;
     font-size: 1.2em;
     font-weight: bold;
-    margin-bottom: 5x;
+    margin-bottom: 5px;
 }
 
 .edit-tomb-button {
     border-radius: 10px;
-    border:2px solid gray;
+    border: 2px solid gray;
     box-shadow: dimgray;
     background-color: #627870;
     width: 80%;
@@ -95,12 +97,50 @@
     text-align: center;
 }
 
-#tombview {
-    border: 1px solid black;
+#tombview-component {
+    /*border: 2px solid #917b7a;*/
+    padding: 0px 10px 0px 10px;
+    margin: auto;
+    /*box-shadow: 2px 2px 2px #cccccc;*/
+    /*background-color: #ccc4c4;*/
+}
+
+#single-tomb-box {
+    padding: 0px 10px 10px 10px;
+}
+
+#single-tomb {
+    border: 2px solid #917b7a;
+    height: 200px;
     padding: 10px;
-    margin: 10px;
     border-radius: 5px;
-    box-shadow: 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px;
+    background-color: #ccc4c4;
+    text-align: center;
+}
+
+#tomb-lastname {
+    font-family: 'Roboto', sans-serif;
+    color: #5c4b4c;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#tomb-birthday {
+    font-style: italic;
+    font-family: 'Roboto', sans-serif;
+    color: #5c4b4c;
+    margin-bottom: 10px;
+}
+
+#tomb-inscription {
+    border: 1px solid #917b7a;
+    padding-top: 5px;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    color: #5c4b4c;
+    height: 110px;
 }
 
 
@@ -174,13 +214,14 @@
     }
 
     #nav-mypage {
-        float:right;
+        float: right;
     }
 
     #logincomponent {
         display: none;
     }
-    #logincomponent-mypage{
+
+    #logincomponent-mypage {
         display: block;
     }
 
@@ -236,11 +277,21 @@
 /********** Small devices only **********/
 @media (min-width: 375px) and (max-width: 765px) {
     .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
-        clear: left;
+        float: left;
+    }
+
+    #main-content > h1 {
+        font-family: 'PT Sans', sans-serif;
+        color: #8a7776;
+        text-align: center;
+        font-size: 2.0em;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin: 10px;
     }
 
     #nav-mypage {
-        float:right;
+        float: right;
     }
 
     #logincomponent {

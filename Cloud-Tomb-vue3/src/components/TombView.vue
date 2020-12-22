@@ -1,30 +1,28 @@
 <template>
 
   <!--   show random tombs from database-->
-  <div>
-    Cloud Tomb:
-    <div class="flex flex-wrap" v-if="randomUsers">
-      <button
+  <div class="container">
+    <section class="row" v-if="randomUsers">
+      <div
           v-for="[userId, randomUser] of Object.entries(randomUsers)" :key="userId"
-          class="w-1/3"
           @click="open(userId)"
-          z-10
-      >
-        <div
-            class="h-64 m-1 box-border text-white bg-teal-700">
-          <div class="text-center m-1">
-            {{ randomUser.lastName }}
+          class="col-lg-4 col-md-4 col-sm-12">
+        <div id="single-tomb-box">
+          <div id="single-tomb">
+            <div id="tomb-lastname">
+              {{ randomUser.lastName }}
+            </div>
+            <div id="tomb-birthday">
+              {{ randomUser.birthday }}
+            </div>
+            <div id="tomb-inscription">
+              "{{ randomUser.inscription }}"
+            </div>
           </div>
-          <div class="text-center m-1">
-            {{ randomUser.birthday }}
-          </div>
-          <div class="text-center m-1">
-            "{{ randomUser.inscription }}"
-          </div>
+          <!--        <button z-20 class="border m-1">like</button>-->
         </div>
-<!--        <button z-20 class="border m-1">like</button>-->
-      </button>
-    </div>
+      </div>
+    </section>
   </div>
 </template>
 <script>

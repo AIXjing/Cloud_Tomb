@@ -1,21 +1,17 @@
 <template>
-  <div class="container">
+  <div id="main-content" class="container">
     <h1>Welcome to Cloud Tomb</h1>
     <div class="row">
       <div class="col-lg-3">
-        <div id="logincomponent">
-          <LoginComponent @open-login-modal="isLoginOpen = true" @open-signup-modal="isSignupOpen=true"/>
-        </div>
+          <LoginComponent id="logincomponent" @open-login-modal="isLoginOpen = true" @open-signup-modal="isSignupOpen=true"/>
       </div>
       <div class="col-lg-9">
-        <div id="tombview">
-          <TombView/>
-        </div>
+          <TombView id="tombview-component"/>
       </div>
-    </div>
 
-    <SignupModal v-if="isSignupOpen" @close-signup="isSignupOpen=false"/>
-    <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>
+      <SignupModal v-if="isSignupOpen" @close-signup="isSignupOpen=false"/>
+      <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>
+    </div>
   </div>
 </template>
 
