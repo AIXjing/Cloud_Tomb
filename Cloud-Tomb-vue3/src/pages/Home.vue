@@ -1,22 +1,18 @@
 <template>
-  <div class="w-full">
-    <!--        </div>-->
-    <div class="flex flex-col bg-gray-200">
-      <div class="bg-gray-200">
-        <h1 class="text-center">Welcome to Cloud Tomb</h1>
+  <div id="main-content" class="container">
+    <h1>Welcome to Cloud Tomb</h1>
+    <div class="row">
+      <div class="col-lg-3">
+          <LoginComponent id="logincomponent" @open-login-modal="isLoginOpen = true" @open-signup-modal="isSignupOpen=true"/>
       </div>
-      <div class="flex">
-        <div class="flex-none text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
-          <LoginComponent @open-login-modal="isLoginOpen = true" @open-signup-modal="isSignupOpen=true"/>
-        </div>
-        <div class="flex-1 text-gray-700 text-center bg-gray-400 px-2 py-2 m-2">
-          <TombView/>
-        </div>
+      <div class="col-lg-9">
+          <TombView id="tombview-component"/>
       </div>
+
+      <SignupModal v-if="isSignupOpen" @close-signup="isSignupOpen=false"/>
+      <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>
     </div>
   </div>
-  <SignupModal v-if="isSignupOpen" @close-signup="isSignupOpen=false"/>
-  <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen=false"/>
 </template>
 
 <script>

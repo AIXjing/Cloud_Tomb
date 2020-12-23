@@ -1,11 +1,11 @@
 <template>
-  <nav
-      class="w-full bg-teal-800 text-white
-      px-4 py-2 flex justify-between"
-  >
-    <router-link v-for="item in list" :key="item.to"
-                 class="mx-4" :to="item.to"> {{ item.title }} </router-link>
-
+  <nav class="nav-style">
+    <div>
+      <router-link :to="{path: '/'}"> Home </router-link>
+    </div>
+    <div id="nav-mypage">
+      <router-link :to="{path: '/Mypage'}"> My page </router-link>
+    </div>
   </nav>
 </template>
 
@@ -18,13 +18,13 @@ export default {
   //     isLoggedIn: Boolean,
   // },
 
-  data(){
+  data() {
     return {
-      list:[
-        {title: "Home", to: "/"},
-        // {title: "Calendar", to: "/calendar"},
+      // list: [
+      //   {title: "Home", to: "/"},
+      //   {title: "My page", to: "/Mypage"},
         // {title: "Cloud-Tombs", to: "/cloudtombs"},
-      ]
+      // ]
     }
   },
 }
