@@ -6,7 +6,7 @@
       <div
           v-for="[userId, randomUser] of Object.entries(randomUsers)" :key="userId"
           @click="open(userId)"
-          class="col-lg-4 col-md-4 col-sm-12">
+          class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
         <div id="single-tomb-box">
           <div id="single-tomb">
             <div id="tomb-lastname">

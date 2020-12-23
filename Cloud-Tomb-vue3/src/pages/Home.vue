@@ -2,10 +2,10 @@
   <div id="main-content" class="container">
     <h1>Welcome to Cloud Tomb</h1>
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-xl-3 col-lg-3">
           <LoginComponent id="logincomponent" @open-login-modal="isLoginOpen = true" @open-signup-modal="isSignupOpen=true"/>
       </div>
-      <div class="col-lg-9">
+      <div class="col-xl-9 col-lg-9">
           <TombView id="tombview-component"/>
       </div>
 
